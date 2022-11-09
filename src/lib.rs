@@ -147,8 +147,8 @@ fn print(output: String, fg: Color, bg: Color, attributes: &Vec<Attribute>, rese
 		execute!
 		(
 			stdout(),
-			SetForegroundColor(fg),
-			SetBackgroundColor(bg),
+			//: WHY IS THIS BROKEN?????
+			SetColors(Colors::new(fg, bg)),
 			Print(output),
 			ResetColor,
 		).unwrap();
