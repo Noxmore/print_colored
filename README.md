@@ -1,8 +1,8 @@
 A small crate to help me print colored text.
 
-As an example here's the `print_colored!` macro's doc:
+As an example here's the `cprint!` macro's doc:
 
-# print_colored!(...)
+# cprint!(...)
 
 Prints something out with the specified formatting.
 
@@ -30,9 +30,9 @@ use print_colored::*;
 
 fn main()
 {
-  print_colored!("§ub0This is blue against black, underlined! §rAnd this is the terminal's default color!");
+  cprint!("§ub0This is blue against black, underlined! §rAnd this is the terminal's default color!\n");
 
   let foo = 32;
-  print_colored!("§07This is Black against Gray! §rThis macro also supports arguments like these: {foo}");
+  cprint!("§07This is Black against Gray! §rThis macro also supports arguments like these: {foo}\n");
 }
 ```

@@ -34,21 +34,30 @@ pub const DEFAULT_COLOR_CHAR: char = '§';
 /// 
 /// fn main()
 /// {
-/// 	print_colored!("§ub0This is blue against black, underlined! §rAnd this is the terminal's default color!");
+/// 	cprint!("§ub0This is blue against black, underlined! §rAnd this is the terminal's default color!\n");
 /// 
 /// 	let foo = 32;
-/// 	print_colored!("§07This is Black against Gray! §rThis macro also supports arguments like these: {foo}");
+/// 	cprint!("§07This is Black against Gray! §rThis macro also supports arguments like these: {foo}\n");
 /// }
 /// ```
 #[macro_export]
-macro_rules! print_colored
+macro_rules! cprint
 {
 	($($arg:tt)*) => {{
-		$crate::_print_colored($crate::DEFAULT_COLOR_CHAR, std::format_args!($($arg)*), $crate::get_color_map(), $crate::get_attribute_map());
+		$crate::_print_colored($crate::DEFAULT_COLOR_CHAR, std::format_args!($($arg)*), $crate::get_color_map(), $crate::get_attribute_map(), false);
 	}};
 }
 
-/// Like `print_colored!` but with the color formatting character specified.
+/// Like `cprint!` but with a newline character at the end.
+#[macro_export]
+macro_rules! cprintln
+{
+	($($arg:tt)*) => {{
+		$crate::_print_colored($crate::DEFAULT_COLOR_CHAR, std::format_args!($($arg)*), $crate::get_color_map(), $crate::get_attribute_map(), true);
+	}};
+}
+
+/// Like `cprint!` but with the color formatting character specified.
 /// 
 /// ## Examples
 /// 
@@ -57,23 +66,33 @@ macro_rules! print_colored
 /// 
 /// fn main()
 /// {
-/// 	print_colored_with!('&', "&c0This &ris red!");
+/// 	cprint_with!('&', "&c0This &ris red!");
 /// }
 /// ```
 #[macro_export]
-macro_rules! print_colored_with
+macro_rules! cprint_with
 {
 	($chr:expr, $($arg:tt)*) => {{
-		$crate::_print_colored($chr, std::format_args!($($arg)*), $crate::get_color_map(), $crate::get_attribute_map());
+		$crate::_print_colored($chr, std::format_args!($($arg)*), $crate::get_color_map(), $crate::get_attribute_map(), false);
+	}};
+}
+
+/// Like `cprint_with!` but with a newline character at the end.
+#[macro_export]
+macro_rules! cprintln_with
+{
+	($chr:expr, $($arg:tt)*) => {{
+		$crate::_print_colored($chr, std::format_args!($($arg)*), $crate::get_color_map(), $crate::get_attribute_map(), true);
 	}};
 }
 
 /// Internal function to print, it is recommended to use the `print_colored!` or `print_colored_with!` macro instead of calling this.
-pub fn _print_colored(color_char: char, args: fmt::Arguments<'_>, color_map: HashMap<char, Color>, attribute_map: HashMap<char, Attribute>)
+pub fn _print_colored(color_char: char, args: fmt::Arguments<'_>, color_map: HashMap<char, Color>, attribute_map: HashMap<char, Attribute>, add_newline: bool)
 {
 	//let mut input = String::new();
 	//input.write_fmt(args).ok();
-	let input = fmt::format(args);
+	let mut input = fmt::format(args);
+	if add_newline { input += "\n"; }
 	
 	//let color_map = get_color_map();
 	//let attribute_map = get_attribute_map();
