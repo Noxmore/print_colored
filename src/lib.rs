@@ -24,10 +24,10 @@
 //! 
 //! fn main()
 //! {
-//! 	cprint!("§ub0This is blue against black, underlined! §rAnd this is the terminal's default color!\n");
+//! 	cprintln!("§ub0This is blue against black, underlined! §rAnd this is the terminal's default color!");
 //! 
 //! 	let foo = 32;
-//! 	cprint!("§07This is Black against Gray! §rThis macro also supports arguments like these: {foo}\n");
+//! 	cprintln!("§07This is Black against Gray! §rThis macro also supports arguments like these: {foo}");
 //! }
 //! ```
 
