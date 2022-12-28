@@ -4,7 +4,7 @@
 //! 
 //! If you put the color formatting character in your input, followed by a formatting code, the text after that point will be formatted with that color.
 //! 
-//! The default formatting color character is `'§'` (if you have a num-pad type right-alt-down > 0167 > right-alt-up) but you can use an alternative character with `print_colored_with!`.
+//! The default formatting color character is `'§'` (if you have a num-pad type right-alt-down > 0167 > right-alt-up) but you can use an alternative character with `cprintln_with!`.
 //! 
 //! A formatting code is either an 'r' for resetting the color, or 2 hex digits, regarding the foreground and background colors respectively. The case of the formatting code does not matter.
 //! 
@@ -43,7 +43,7 @@ pub const DEFAULT_COLOR_CHAR: char = '§';
 /// 
 /// If you put the color formatting character in your input, followed by a formatting code, the text after that point will be formatted with that color.
 /// 
-/// The default formatting color character is `'§'` (if you have a num-pad type right-alt-down > 0167 > right-alt-up) but you can use an alternative character with `print_colored_with!`.
+/// The default formatting color character is `'§'` (if you have a num-pad type right-alt-down > 0167 > right-alt-up) but you can use an alternative character with `cprintln_with!`.
 /// 
 /// A formatting code is either an 'r' for resetting the color, or 2 hex digits, regarding the foreground and background colors respectively. The case of the formatting code does not matter.
 /// 
@@ -115,7 +115,7 @@ macro_rules! cprintln_with
 	}};
 }
 
-/// Internal function to print, it is recommended to use the `print_colored!` or `print_colored_with!` macro instead of calling this.
+/// Internal function to print, it is recommended to use the `cprint!` or `cprint!` macro instead of calling this.
 pub fn _print_colored(color_char: char, args: fmt::Arguments<'_>, color_map: HashMap<char, Color>, attribute_map: HashMap<char, Attribute>, add_newline: bool)
 {
 	//let mut input = String::new();
