@@ -115,7 +115,7 @@ macro_rules! cprintln_with
 	}};
 }
 
-/// Internal function to print, it is recommended to use the `cprint!` or `cprint!` macro instead of calling this.
+/// Internal function to print, it is recommended to use the `cprint!` or `cprintln!` macro instead of calling this.
 pub fn _print_colored(color_char: char, args: fmt::Arguments<'_>, color_map: HashMap<char, Color>, attribute_map: HashMap<char, Attribute>, add_newline: bool)
 {
 	//let mut input = String::new();
